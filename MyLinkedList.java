@@ -210,4 +210,8 @@ public class MyLinkedList{
       other.length = 0;
     }
   }
+
+  public void clear(){
+    length = 0;
+  }
 }
