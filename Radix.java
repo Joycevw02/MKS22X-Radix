@@ -1,9 +1,10 @@
 public class Radix{
+  @SuppressWarnings({"unchecked","rawtypes"})
   public static void radixsort(int[]data){
     //Create bucket
     MyLinkedList<Integer>[] bucket = new MyLinkedList[10];
     for (int i = 0; i < 10; i ++){
-      bucket[i] = new MyLinkedList();
+      bucket[i] = new MyLinkedList<Integer>();
     }
 
     //Loop through data, and find the max absolute number
@@ -19,6 +20,10 @@ public class Radix{
     while (max != 0){
       num ++;
       max /= 10;
+    }
+
+    for (int i = 0; i < 10; i ++){
+
     }
   }
 
