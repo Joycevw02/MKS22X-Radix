@@ -1,11 +1,11 @@
 import java.util.*;
 import java.io.*;
-public class MyLinkedList{
+public class MyLinkedList<E>{
   private class Node{
-    public Integer data;
+    public E data;
     public Node next,prev;
     //Create a node of i, with no previous or next node
-    public Node(Integer i){
+    public Node(E i){
       data = i;
     }
     //Return the next node
@@ -25,11 +25,11 @@ public class MyLinkedList{
       prev = other;
     }
     //Return the data of the node
-    public Integer getData(){
+    public E getData(){
       return data;
     }
     //Set the data to something else
-    public Integer setData(Integer i){
+    public E setData(E i){
       data = i;
       return data;
     }
@@ -48,7 +48,7 @@ public class MyLinkedList{
   public int size(){
     return length;
   }
-  public boolean add(Integer value){
+  public boolean add(E value){
     //Create a temporary node with the new value
     Node temp = new Node(value);
     //If the current size of the list is 0, set both
@@ -98,7 +98,7 @@ public class MyLinkedList{
     return temp;
   }
   //Find the node at the given index and return its data
-  public Integer get(int index){
+  public E get(int index){
     if (index > length || index < 0){
       throw new IndexOutOfBoundsException();
     }
@@ -107,12 +107,12 @@ public class MyLinkedList{
   }
   //Find the node at the given index, set it to the desired
   //value, and return the data
-  public Integer set(int index, Integer value){
+  public E set(int index, E value){
     if (index > length || index < 0){
       throw new IndexOutOfBoundsException();
     }
     Node temp = getNthNode(index);
-    Integer returnval = temp.getData();
+    E returnval = temp.getData();
     temp.setData(value);
     return returnval;
   }
@@ -120,7 +120,7 @@ public class MyLinkedList{
   //If any match the given value, return true
   //If the loop terminates without finding a value,
   //return false
-  public Boolean contains(Integer value){
+  public Boolean contains(E value){
     for (int i = 0; i < length; i ++){
       Node temp = getNthNode(i);
       if (temp.getData() == value){
@@ -130,7 +130,7 @@ public class MyLinkedList{
     return false;
   }
   //If the index is out of bounds, throw the Exception
-  public void add(int index, Integer value){
+  public void add(int index, E value){
     if (index > length || index < 0){
       throw new IndexOutOfBoundsException();
     }
@@ -150,7 +150,7 @@ public class MyLinkedList{
     length ++;
   }
   //If index is out of bounds, throw an exception
-  public Integer remove(int index){
+  public E remove(int index){
     if (index > length || index < 0){
       throw new IndexOutOfBoundsException();
     }
@@ -169,7 +169,7 @@ public class MyLinkedList{
   //Loop through the list until you find a current with
   //the value. If found, return the index. If not, set current
   //to the next node and increase i. If no nodes are found, return -1
-  public int indexOf(Integer value){
+  public int indexOf(E value){
     Node current = start;
     int i = 0;
     while (current != null){
@@ -183,7 +183,7 @@ public class MyLinkedList{
   }
   //If the list contains the given value, set indext to the index of
   //the value and remove using remove by index and return true.
-  public Boolean remove(Integer value){
+  public Boolean remove(E value){
     if(contains(value)){
       int index = indexOf(value);
       remove(index);
@@ -194,6 +194,7 @@ public class MyLinkedList{
   //If the length of this is currently 0, set this to other and clear
   //other. Else, set this's end's next to other's start and other's start's
   //previous to this's end. Increase this's length and set other's length to 0
+  @SuppressWarnings("unchecked") 
   public void extend(MyLinkedList other){
     if (length == 0){
       Node temp = other.start;
@@ -213,5 +214,7 @@ public class MyLinkedList{
 
   public void clear(){
     length = 0;
+    start = null;
+    end = null;
   }
 }
