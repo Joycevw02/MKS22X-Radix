@@ -195,7 +195,7 @@ public class MyLinkedList<E>{
   //other. Else, set this's end's next to other's start and other's start's
   //previous to this's end. Increase this's length and set other's length to 0
   @SuppressWarnings("unchecked") 
-  public void extend(MyLinkedList other){
+  public void extend(MyLinkedList<E> other){
     if (length == 0){
       Node temp = other.start;
       for (int i = 0; i < other.length; i++){
