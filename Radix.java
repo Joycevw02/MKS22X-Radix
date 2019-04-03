@@ -38,6 +38,12 @@ public class Radix{
       }
       //Join the two sides
       join(bucket);
+
+      //While, there is still things in bucket, set data[i2] to the first value
+      //int bucket (or what remains of it)
+      for (int i2 = 0; bucket[i].size() != 0; i2 ++){
+        data[i2] = bucket[i].remove(0);
+      }
     }
   }
 
@@ -51,5 +57,6 @@ public class Radix{
   public static void main(String[] args){
     int[] data = {1,6,8,2,4,1234,38,234,543};
     radixsort(data);
+    System.out.println(data);
   }
 }
