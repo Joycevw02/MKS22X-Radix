@@ -191,25 +191,26 @@ public class MyLinkedList<E>{
     }
     return false;
   }
-  //If the length of this is currently 0, set this to other and clear
-  //other. Else, set this's end's next to other's start and other's start's
-  //previous to this's end. Increase this's length and set other's length to 0
-  @SuppressWarnings("unchecked") 
+
+  @SuppressWarnings("unchecked")
   public void extend(MyLinkedList<E> other){
-    if (length == 0){
-      Node temp = other.start;
-      for (int i = 0; i < other.length; i++){
-        add(temp.getData());
-        temp = temp.next();
-      }
-      other.length = 0;
+    //If the other is empty, terminate the function
+    if (other.size() == 0){
+      return;
     }
+    //If the current linked list is empty, set it equal to the other
+    else if (this.length == 0){
+      start = other.start;
+      end = other.end;
+    }
+    //Else, set this end's next to the other's start and this's end to the
+    //other's end
     else{
-      end.setNext(other.start);
-      other.start.setPrev(end);
-      length += other.length;
-      other.length = 0;
+      (this.end).setNext(other.start);
+      this.end = other.end;
     }
+    //Modify the length
+    this.length += other.length;
   }
 
   public void clear(){
