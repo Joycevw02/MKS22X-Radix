@@ -22,9 +22,23 @@ public class Radix{
       max /= 10;
     }
 
-    for (int i = 0; i < 10; i ++){
+    for (int i = 0; i <= num; i ++){
+      for (int i2 = 0; i2 < data.length; i2 ++){
+        int number = data[i2];
+        int val = (int)(number / Math.pow(10, i)) % 10;
+        if (number < 0){
+          bucket[9 - Math.abs(val)].add(number);
+        }
+        else{
+          bucket[10 + Math.abs(val)].add(number);
+        }
+      }
 
     }
+  }
+
+  private static void join(MyLinkedList<Integer>[] other){
+    
   }
 
   public static void main(String[] args){
