@@ -238,7 +238,7 @@ public class MyLinkedList<E>{
     length ++;
   }
 
-  public void removeFront(){
+  public E removeFront(){
     //Temporary node
     Node temp = start;
     //If the linked list is 0, throw an exception
@@ -248,7 +248,6 @@ public class MyLinkedList<E>{
     //If there is only one element, clear and stop the function
     else if (size() == 1){
       clear();
-      return;
     }
     //Else, set start to the second value and set the previous to null and
     //decrease the length
@@ -257,5 +256,6 @@ public class MyLinkedList<E>{
       start.setPrev(null);
       length --;
     }
+    return temp.getData();
   }
 }
