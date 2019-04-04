@@ -237,4 +237,25 @@ public class MyLinkedList<E>{
     //Increase the size
     length ++;
   }
+
+  public void removeFront(){
+    //Temporary node
+    Node temp = start;
+    //If the linked list is 0, throw an exception
+    if (size() == 0){
+      throw new NoSuchElementException();
+    }
+    //If there is only one element, clear and stop the function
+    else if (size() == 1){
+      clear();
+      return;
+    }
+    //Else, set start to the second value and set the previous to null and
+    //decrease the length
+    else{
+      start = start.next();
+      start.setPrev(null);
+      length --;
+    }
+  }
 }
