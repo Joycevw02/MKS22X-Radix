@@ -218,4 +218,23 @@ public class MyLinkedList<E>{
     start = null;
     end = null;
   }
+
+  public void addEnd(E value){
+    //Temporary node
+    Node temp = new Node(value);
+    //If the linked list is empty, set both start and end to temp
+    if (size() == 0){
+      start = temp;
+      end = temp;
+    }
+    //If not, set end's next to temp and temp's previous to end, then set end
+    //to temp
+    else{
+      end.setNext(temp);
+      temp.setPrev(end);
+      end = temp;
+    }
+    //Increase the size
+    length ++;
+  }
 }
