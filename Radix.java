@@ -32,8 +32,8 @@ public class Radix{
       max /= 10;
     }
 
-    //Run the appropriate amount of times (aka max)
-    for (int i = 0; i < max; i ++){
+    //Run the appropriate amount of times (aka num)
+    for (int i = 0; i < num; i ++){
       //While temp have values...
       while (temp.size() > 0){
         //Val is the value being added and place is the digit
