@@ -70,10 +70,4 @@ public class Radix{
       data[i] = temp.removeFront();
     }
   }
-
-  public static void main(String[] args){
-    int[] data = {1,6,8,2,4,1234,38,234,543};
-    radixsort(data);
-    System.out.println(Arrays.toString(data));
-  }
 }
