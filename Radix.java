@@ -1,10 +1,20 @@
+import java.io.*;
+import java.util.*;
 public class Radix{
   @SuppressWarnings({"unchecked","rawtypes"})
   public static void radixsort(int[]data){
-    //Create bucket
+    //Create bucket and temp to store data
     MyLinkedList<Integer>[] bucket = new MyLinkedList[20];
+    MyLinkedList<Integer> temp = new MyLinkedList<Integer>();
+
+    //Loop through the bucket and make each a linked list
     for (int i = 0; i < 20; i ++){
       bucket[i] = new MyLinkedList<Integer>();
+    }
+
+    //Loop through data and add those values to temp
+    for (int i = 0; i < data.length; i ++){
+      temp.add(data[i]);
     }
 
     //Loop through data, and find the max absolute number
@@ -22,41 +32,48 @@ public class Radix{
       max /= 10;
     }
 
-    //Run as many times as there are digits
-    for (int i = 0; i <= num; i ++){
-      //Stuff from the board
-      for (int i2 = 0; i2 < data.length; i2 ++){
-        int number = data[i2];
-        //Returns the value that we are looking at
-        int val = (int)(number / Math.pow(10, i)) % 10;
-        if (number < 0){
-          bucket[9 - Math.abs(val)].add(number);
+    //Run the appropriate amount of times (aka max)
+    for (int i = 0; i < max; i ++){
+      //While temp have values...
+      while (temp.size() > 0){
+        //Val is the value being added and place is the digit
+        int val = temp.removeFront();
+        int place = (val / (int)Math.pow(10, i)) % 10;
+        //Stuff from board
+        if (place >= 0){
+          bucket[10 + place].add(val);
         }
         else{
-          bucket[10 + Math.abs(val)].add(number);
+          bucket[9 + place].add(val);
         }
       }
-      //Join the two sides
-      join(bucket);
 
-      //While, there is still things in bucket, set data[i2] to the first value
-      //int bucket (or what remains of it)
-      for (int i2 = 0; bucket[i].size() != 0; i2 ++){
-        data[i2] = bucket[i].remove(0);
+      for (int i2 = 0; i2 < 20; i2 ++){
+        //If i2 is 0, then set temp to the values with 0 in that digit
+        if (i2 == 0){
+          temp = bucket[i2];
+        }
+        //Else, extend in order
+        else {
+          temp.extend(bucket[i2]);
+        }
+      }
+
+      //Clear the bucket
+      for (int i2 = 0; i2 < 20; i2 ++){
+        bucket[i2] = new MyLinkedList<>();
       }
     }
-  }
 
-  private static void join(MyLinkedList<Integer>[] temp){
-    //Loop through the bucket and link up the two parts
-    for (int i = temp.length - 2; i >= 0; i --){
-      temp[i].extend(temp[i + 1]);
+    //Set data to temp
+    for (int i = 0; i < data.length; i ++){
+      data[i] = temp.removeFront();
     }
   }
 
   public static void main(String[] args){
     int[] data = {1,6,8,2,4,1234,38,234,543};
     radixsort(data);
-    System.out.println(data);
+    System.out.println(Arrays.toString(data));
   }
 }
